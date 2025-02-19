@@ -1,0 +1,67 @@
+-- Linking Chicken Salad (Dish ID: 1) to its ingredients
+INSERT INTO dish_ingredients (dish_id, ingredient_id, quantity, units, description)
+VALUES
+    (1, 31, 100, 'grams', 'Chicken breast, cooked'),
+    (1, 14, 50, 'grams', 'Carrot, shredded'),
+    (1, 18, 30, 'grams', 'Fresh spinach'),
+    (1, 16, 20, 'grams', 'Cucumber, sliced'),
+    (1, 5, 20, 'grams', 'Edam cheese, cubed'),
+    (1, 17, 10, 'grams', 'Bell pepper, diced');
+
+-- Linking Beef Steak (Dish ID: 2) to its ingredients
+INSERT INTO dish_ingredients (dish_id, ingredient_id, quantity, units, description)
+VALUES
+    (2, 30, 200, 'grams', 'Beef tenderloin, grilled'),
+    (2, 6, 50, 'grams', 'Mozzarella, sliced'),
+    (2, 8, 20, 'ml', 'Milk, for creamy sauce'),
+    (2, 12, 10, 'grams', 'Lentils, cooked'),
+    (2, 17, 5, 'grams', 'Fresh rosemary for seasoning');
+
+-- Linking Salmon with Rice (Dish ID: 3) to its ingredients
+INSERT INTO dish_ingredients (dish_id, ingredient_id, quantity, units, description)
+VALUES
+    (3, 32, 200, 'grams', 'Salmon fillet, grilled'),
+    (3, 33, 100, 'grams', 'Rice, cooked'),
+    (3, 19, 50, 'grams', 'Steamed broccoli'),
+    (3, 5, 10, 'grams', 'Olive oil for frying'),
+    (3, 8, 20, 'ml', 'Soy sauce for flavor');
+
+-- Linking Vegetable Stir-fry (Dish ID: 4) to its ingredients
+INSERT INTO dish_ingredients (dish_id, ingredient_id, quantity, units, description)
+VALUES
+    (4, 14, 100, 'grams', 'Carrot, sliced'),
+    (4, 17, 50, 'grams', 'Bell pepper, chopped'),
+    (4, 19, 50, 'grams', 'Broccoli, chopped'),
+    (4, 18, 50, 'grams', 'Spinach, fresh'),
+    (4, 10, 1, 'slice', 'Rye bread, for serving');
+    
+-- Linking Quinoa Salad (Dish ID: 5) to its ingredients
+INSERT INTO dish_ingredients (dish_id, ingredient_id, quantity, units, description)
+VALUES
+    (5, 9, 100, 'grams', 'Oats, cooked (for quinoa substitute)'),
+    (5, 14, 50, 'grams', 'Carrot, shredded'),
+    (5, 16, 50, 'grams', 'Cucumber, diced'),
+    (5, 17, 50, 'grams', 'Bell pepper, diced'),
+    (5, 8, 20, 'ml', 'Lemon vinaigrette (made from lemon juice and olive oil)'),
+    (5, 33, 50, 'grams', 'Quinoa, cooked'),
+    (5, 24, 20, 'grams', 'Orange, juiced (for flavor)');
+
+-- Linking Lentil Soup (Dish ID: 6) to its ingredients
+INSERT INTO dish_ingredients (dish_id, ingredient_id, quantity, units, description)
+VALUES
+    (6, 12, 100, 'grams', 'Lentils, cooked'),
+    (6, 14, 50, 'grams', 'Carrot, diced'),
+    (6, 19, 50, 'grams', 'Broccoli, chopped (optional)'),
+    (6, 16, 50, 'grams', 'Cucumber, sliced (optional for garnish)'),
+    (6, 8, 50, 'ml', 'Broth, vegetable or chicken'),
+    (6, 7, 1, 'whole', 'Egg, whisked (to thicken broth)');
+
+-- Linking Eggplant Parmesan (Dish ID: 7) to its ingredients
+INSERT INTO dish_ingredients (dish_id, ingredient_id, quantity, units, description)
+VALUES
+    (7, 14, 100, 'grams', 'Eggplant, sliced and breaded'),
+    (7, 6, 50, 'grams', 'Mozzarella, shredded'),
+    (7, 5, 50, 'grams', 'Edam cheese, shredded'),
+    (7, 15, 100, 'grams', 'Tomato, marinara sauce (for layering)'),
+    (7, 8, 20, 'ml', 'Milk, for dipping the eggplant slices'),
+    (7, 18, 50, 'grams', 'Spinach, sautéed for garnish');
