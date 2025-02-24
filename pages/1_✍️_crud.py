@@ -89,23 +89,63 @@ df = pd.DataFrame(recipes, columns=["id","name","description","category"])
 st.dataframe(df.set_index("id"))
 
 
-
 # Add Recipe Section
+st.write("---")
+
 ingredients = fetch_ingredients_as_dict()
 categories = fetch_categories_as_dict()
-st.write(categories)
 st.subheader('Add New Recipe')
 new_dish_name = st.text_input('Dish Name')
 new_description = st.text_area('Description')
 new_category = st.multiselect('Category', options=categories)
 
-new_ingredient_1 = st.selectbox('ingredient', options=ingredients, index = None, placeholder='ahoj')
-new_ingredient_2 = st.selectbox('ingredient', options=ingredients, index = None, placeholder='ahoj2')
-new_ingredient_3 = st.selectbox('ingredient', options=ingredients, index = None, placeholder='ahoj3')
-new_ingredient_4 = st.selectbox('ingredient', options=ingredients, index = None, placeholder='ahoj4')
-new_ingredient_5 = st.selectbox('ingredient', options=ingredients, index = None, placeholder='ahoj5')
-
-
+new_ingredient_1 = st.selectbox('ingredient', options=ingredients, index=None, placeholder='ingredient')
+if new_ingredient_1:
+    st.write(f"You have selected {new_ingredient_1}")
+    
+    new_ingredient_2 = st.selectbox('ingredient', options=ingredients, index=None, placeholder='ingredient2')
+    if new_ingredient_2:
+        st.write(f"You have selected {new_ingredient_2}")
+        
+        new_ingredient_3 = st.selectbox('ingredient', options=ingredients, index=None, placeholder='ingredient3')
+        if new_ingredient_3:
+            st.write(f"You have selected {new_ingredient_3}")
+            
+            new_ingredient_4 = st.selectbox('ingredient', options=ingredients, index=None, placeholder='ingredient4')
+            if new_ingredient_4:
+                st.write(f"You have selected {new_ingredient_4}")
+                
+                new_ingredient_5 = st.selectbox('ingredient', options=ingredients, index=None, placeholder='ingredient5')
+                if new_ingredient_5:
+                    st.write(f"You have selected {new_ingredient_5}")
+                    
+                    new_ingredient_6 = st.selectbox('ingredient', options=ingredients, index=None, placeholder='ingredient6')
+                    if new_ingredient_6:
+                        st.write(f"You have selected {new_ingredient_6}")
+                        
+                        new_ingredient_7 = st.selectbox('ingredient', options=ingredients, index=None, placeholder='ingredient7')
+                        if new_ingredient_7:
+                            st.write(f"You have selected {new_ingredient_7}")
+                            
+                            new_ingredient_8 = st.selectbox('ingredient', options=ingredients, index=None, placeholder='ingredient8')
+                            if new_ingredient_8:
+                                st.write(f"You have selected {new_ingredient_8}")
+                                
+                                new_ingredient_9 = st.selectbox('ingredient', options=ingredients, index=None, placeholder='ingredient9')
+                                if new_ingredient_9:
+                                    st.write(f"You have selected {new_ingredient_9}")
+                                    
+                                    new_ingredient_10 = st.selectbox('ingredient', options=ingredients, index=None, placeholder='ingredient10')
+                                    if new_ingredient_10:
+                                        st.write(f"You have selected {new_ingredient_10}")
+                                        
+                                        new_ingredient_11 = st.selectbox('ingredient', options=ingredients, index=None, placeholder='ingredient11')
+                                        if new_ingredient_11:
+                                            st.write(f"You have selected {new_ingredient_11}")
+                                            
+                                            new_ingredient_12 = st.selectbox('ingredient', options=ingredients, index=None, placeholder='ingredient12')
+                                            if new_ingredient_12:
+                                                st.write(f"You have selected {new_ingredient_12}")
 
 if st.button('Add Recipe'):
     if new_dish_name and new_description and new_category:
@@ -114,35 +154,33 @@ if st.button('Add Recipe'):
     else:
         st.warning('Please fill in all fields.')
 
-# Edit Recipe Section
-st.subheader('Edit Recipe')
-recipe_id_to_edit = st.number_input('Enter Recipe ID to Edit', min_value=1)
-if recipe_id_to_edit:
-    recipe_to_edit = cursor.execute("SELECT * FROM dishes WHERE id = ?;", (recipe_id_to_edit,)).fetchone()
+
+# Edit or delete Recipe Section
+st.write("---")
+st.subheader('Edit or Delete Recipe')
+recipe_id_to_edit_or_delete = st.number_input('Enter Recipe ID to Edit', min_value=1)
+if recipe_id_to_edit_or_delete:
+    recipe_to_edit = cursor.execute("SELECT * FROM dishes WHERE id = ?;", (recipe_id_to_edit_or_delete,)).fetchone()
     if recipe_to_edit:
         edited_dish_name = st.text_input('Dish Name', recipe_to_edit[1])
         edited_description = st.text_area('Description', recipe_to_edit[2])
         edited_category = st.text_input('Category', recipe_to_edit[3])
         if st.button('Save Changes'):
             if edited_dish_name and edited_description and edited_category:
-                edit_recipe(recipe_id_to_edit, edited_dish_name, edited_description, edited_category)
+                edit_recipe(recipe_id_to_edit_or_delete, edited_dish_name, edited_description, edited_category)
                 st.success('Recipe updated successfully!')
             else:
                 st.warning('Please fill in all fields.')
+        if st.button('Delete Recipe'):
+            if recipe_id_to_edit_or_delete:
+                delete_recipe(recipe_id_to_edit_or_delete)
+                st.success('Recipe deleted successfully!')
+            else:
+                st.error('Please select a valid id.')
     else:
         st.error('Recipe not found.')
 
-# Delete Recipe Section
-st.subheader('Delete Recipe')
-recipe_id_to_delete = st.number_input('Enter Recipe ID to Delete', min_value=1)
-if recipe_id_to_delete:
-    recipe_to_delete = cursor.execute("select * from dishes where id=?;", (recipe_id_to_delete,)).fetchall()
-    st.dataframe(pd.DataFrame(recipe_to_delete, columns = ["id","dish_name","description","category"]).set_index("id"))
 
-    if st.button('Delete Recipe'):
-        if recipe_id_to_delete:
-            delete_recipe(recipe_id_to_delete)
-            st.success('Recipe deleted successfully!')
 
 # Close connection after the app is done
 conn.close()
