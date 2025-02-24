@@ -97,7 +97,7 @@ categories = fetch_categories_as_dict()
 st.subheader('Add New Recipe')
 new_dish_name = st.text_input('Dish Name')
 new_description = st.text_area('Description')
-new_category = st.multiselect('Category', options=categories)
+new_category = st.selectbox('Category', options=categories)
 
 new_ingredient_1 = st.selectbox('ingredient', options=ingredients, index=None, placeholder='ingredient')
 if new_ingredient_1:
