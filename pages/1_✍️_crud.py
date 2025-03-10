@@ -112,8 +112,6 @@ st.write("---")
 ingredients = fetch_ingredients_as_dict()
 categories = fetch_categories_as_dict()
 
-st.write(get_units_from_id(ingredients["Egg"]))
-
 st.subheader('Add New Recipe')
 new_dish_name = st.text_input('Dish Name')
 new_description = st.text_area('Description')
