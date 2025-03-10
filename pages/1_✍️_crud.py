@@ -13,7 +13,7 @@ st.set_page_config(layout="wide")
 ###########################################################################################
 
 # add a new recipe
-def add_recipe(dish_name, description, category):
+def add_recipe(dish_name, description, category, ingredients, amounts):
     cursor.execute("""
     INSERT INTO dishes (dish_name, description, category)
     VALUES (?, ?, ?);
@@ -78,6 +78,18 @@ def get_units_from_id(id_ingredient):
     """, (id_ingredient,)).fetchall()
     return result_set[0][0]
 
+def get_default_step_recipe_from_id(id_ingredient):
+    result_set = cursor.execute("""
+    select default_step_recipe from ingredients where id = ?;
+    """, (id_ingredient,)).fetchall()
+    return result_set[0][0]
+
+def get_default_value_recipe_from_id(id_ingredient):
+    result_set = cursor.execute("""
+    select default_value_recipe from ingredients where id = ?;
+    """, (id_ingredient,)).fetchall()
+    return result_set[0][0]
+
 ###########################################################################################
 ## CODE:
 ###########################################################################################
@@ -108,10 +120,12 @@ new_description = st.text_area('Description')
 new_category = st.selectbox('Category', options=categories)
 new_ingredient_1 = st.selectbox('ingredient', options=ingredients, index=None, placeholder='ingredient')
 if new_ingredient_1:
+    new_ingredient_1_value = st.number_input('Amount:', value = get_default_value_recipe_from_id(ingredients[new_ingredient_1]), step = get_default_step_recipe_from_id(ingredients[new_ingredient_1]))
     st.write(f"units: {get_units_from_id(ingredients[new_ingredient_1])}")
-    
+
     new_ingredient_2 = st.selectbox('ingredient', options=ingredients, index=None, placeholder='ingredient2')
     if new_ingredient_2:
+        st.number_input('100')
         st.write(f"units: {get_units_from_id(ingredients[new_ingredient_2])}")  # Same units as the first one
         
         new_ingredient_3 = st.selectbox('ingredient', options=ingredients, index=None, placeholder='ingredient3')
