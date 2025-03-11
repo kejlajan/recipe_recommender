@@ -116,10 +116,15 @@ st.subheader('Add New Recipe')
 new_dish_name = st.text_input('Dish Name')
 new_description = st.text_area('Description')
 new_category = st.selectbox('Category', options=categories)
+
+col1, col2 = st.columns(2, vertical_alignment = "center")
+
 new_ingredient_1 = st.selectbox('ingredient', options=ingredients, index=None, placeholder='ingredient')
 if new_ingredient_1:
-    new_ingredient_1_value = st.number_input('Amount:', value = get_default_value_recipe_from_id(ingredients[new_ingredient_1]), step = get_default_step_recipe_from_id(ingredients[new_ingredient_1]))
-    st.write(f"units: {get_units_from_id(ingredients[new_ingredient_1])}")
+    with col1:    
+        new_ingredient_1_value = st.number_input('Amount:', value = get_default_value_recipe_from_id(ingredients[new_ingredient_1]), step = get_default_step_recipe_from_id(ingredients[new_ingredient_1]))
+    with col2:
+        st.write(f"units: {get_units_from_id(ingredients[new_ingredient_1])}")
 
     new_ingredient_2 = st.selectbox('ingredient', options=ingredients, index=None, placeholder='ingredient2')
     if new_ingredient_2:
