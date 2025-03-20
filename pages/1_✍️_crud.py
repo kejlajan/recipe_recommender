@@ -12,7 +12,8 @@ st.set_page_config(layout="wide")
 ## DEFS:
 ###########################################################################################
 
-# add a new recipe
+
+# RECIPES:
 def add_recipe(dish_name, description, category, ingredients, amounts):
     cursor.execute("""
     INSERT INTO dishes (dish_name, description, category)
@@ -27,7 +28,6 @@ def add_recipe(dish_name, description, category, ingredients, amounts):
         """, (dish_id, ingredients[ingredient], amount, get_units_from_id(ingredients[ingredient])))
     conn.commit()
 
-# edit an existing recipe
 def edit_recipe(recipe_id, dish_name, description, category):
     cursor.execute("""
     UPDATE dishes
@@ -36,33 +36,8 @@ def edit_recipe(recipe_id, dish_name, description, category):
     """, (dish_name, description, category, recipe_id))
     conn.commit()
 
-# delete a recipe
 def delete_recipe(recipe_id):
     cursor.execute("DELETE FROM dishes WHERE id = ?;", (recipe_id))
-    conn.commit()
-
-# add ingredient
-def add_ingredient(id,czech_name,english_name,category,protein,carbohydrates,price_per_kg):
-    cursor.execute("""INSERT INTO ingredients (
-                            id,
-                            czech_name,
-                            english_name,
-                            category,
-                            protein,
-                            fats,
-                            carbohydrates,
-                            price_per_kg
-                        )
-                        VALUES (
-                            '?',
-                            '?',
-                            '?',
-                            '?',
-                            '?',
-                            '?',
-                            '?',
-                            '?'
-                        );""",(id,czech_name, english_name, category, protein, carbohydrates, price_per_kg))
     conn.commit()
 
 # fetch ingredients
@@ -109,8 +84,6 @@ def get_default_value_recipe_from_id(id_ingredient):
 
 # Streamlit interface
 st.title('Recipe Management')
-
-
 
 # Display existing recipes
 st.subheader('Recipes')
