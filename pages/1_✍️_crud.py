@@ -18,13 +18,13 @@ def add_recipe(dish_name, description, category, ingredients, amounts):
     INSERT INTO dishes (dish_name, description, category)
     VALUES (?, ?, ?);
     """, (dish_name, description, category))
-    conn.commit()
+    dish_id = cursor.lastrowid
 
     for ingredient, amount in zip(ingredients, amounts):
         cursor.execute("""
         INSERT into dish_ingredients (dish_id, ingredient_id, quantity, units)
         VALUES (?,?,?,?);
-        """, (get_id_from_dish_name(dish_name), ingredients[ingredient], amount, get_units_from_id(ingredients[ingredient])))
+        """, (dish_id, ingredients[ingredient], amount, get_units_from_id(ingredients[ingredient])))
     conn.commit()
 
 # edit an existing recipe
