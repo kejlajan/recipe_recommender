@@ -39,7 +39,25 @@ def get_potential_dishes(ingredient_ids):
     dish_ids = [row[0] for row in cursor.fetchall()]
     
     conn.close()
-    return dish_ids, query, ingredient_ids
+    return dish_ids
+
+
+def get_dish_from_id(dish_id):
+    conn = sqlite3.connect("food.db")
+    cursor = conn.cursor()
+    
+    query = """SELECT 
+        dish_name,
+        description,
+        category
+    FROM dishes d
+    WHERE d.id = ?"""
+    cursor.execute(query, (dish_id,))
+    dish_name = cursor.fetchone()
+    
+    conn.close()
+    
+    return dish_name
 
 
 st.title("Food recommender:")
@@ -52,8 +70,18 @@ ingredient_ids = [ingredients[ingredient] for ingredient in selected_ingredients
 if selected_ingredients:
     st.write(f"IDs for the selected ingredients are: {ingredient_ids}")
 
+# see what dishes i can cook
 st.subheader("The dishes you can make with those (↑) ingredients are:")
+potential_dishes = get_potential_dishes(ingredient_ids)
 
+# get other info than id for each potentially available dish
+dishes = [get_dish_from_id(dish_id) for dish_id in potential_dishes]
 
-st.write(get_potential_dishes(ingredient_ids)[0])
-st.write(get_potential_dishes(ingredient_ids)) # for debug purposes only
+# Loop through dishes and create an expander for each
+for dish in dishes:
+    with st.expander(dish[0].upper()):
+        st.write(f"**Calories:** {67} kcal")
+        st.write(f"**Category:** {dish[2]}g")
+        st.write(f"**Description:** {dish[1]}")
+
+st.write(dishes)
