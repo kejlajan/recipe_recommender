@@ -1,0 +1,7 @@
+[ ] recommender
+	(o) fetch ingredients for recipe id
+	(x) display in expanders
+	( ) remove debugging bullshit  
+[ ] DB tweaks
+[ ] mass load of ingredients
+[ ] crud tool for ingredients
