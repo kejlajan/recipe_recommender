@@ -1,5 +1,6 @@
 [ ] recommender
 	(o) fetch ingredients for recipe id
+	( ) fetch calories for reciepe id
 	(x) display in expanders
 	( ) remove debugging bullshit  
 [ ] DB tweaks

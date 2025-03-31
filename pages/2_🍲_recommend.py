@@ -81,7 +81,12 @@ def get_dish_ingredients_from_dish_id(dish_id):
     conn.close()   
     return dish_ingredients
 
+def get_dish_ingredients_details(list_of_lists_of_ingredients):
+    return {row[5]:[row[9], row[5], row[6], row[7]] for row in list_of_lists_of_ingredients}
 
+
+
+st.write(get_dish_ingredients_details(get_dish_ingredients_from_dish_id(7)))
 st.write(get_dish_ingredients_from_dish_id(7))
 
 st.title("Food recommender:")
