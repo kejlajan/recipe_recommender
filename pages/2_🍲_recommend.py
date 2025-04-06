@@ -85,19 +85,11 @@ def get_dish_ingredients_details(list_of_lists_of_ingredients):
     return {row[5]:[row[9], row[5], row[6], row[7]] for row in list_of_lists_of_ingredients}
 
 
-
-st.write(get_dish_ingredients_details(get_dish_ingredients_from_dish_id(7)))
-st.write(get_dish_ingredients_from_dish_id(7))
-
 st.title("Food recommender:")
-ingredients = fetch_ingredients_as_dict()
 
-selected_ingredients = st.multiselect("select ingredients that you have at home", ingredients)
+selected_ingredients = st.multiselect("select ingredients that you have at home", fetch_ingredients_as_dict())
 
-ingredient_ids = [ingredients[ingredient] for ingredient in selected_ingredients]
-
-#if selected_ingredients:
-#    st.write(f"IDs for the selected ingredients are: {ingredient_ids}")
+ingredient_ids = [fetch_ingredients_as_dict()[ingredient] for ingredient in selected_ingredients]
 
 # see what dishes i can cook
 st.subheader("The dishes you can make with those (↑) ingredients are:")
@@ -105,18 +97,32 @@ potential_dishes = get_potential_dishes(ingredient_ids)
 
 # get other info than id for each potentially available dish
 dishes = [get_dish_from_id(dish_id) for dish_id in potential_dishes]
-dish_ingredients = ["ovoce", "cibule", "cesnek"]
+dish_and_ingredients = {}
+for dish_id in potential_dishes: # iterate over the dish_ids that i can cook
+    dish_name = get_dish_from_id(dish_id)[1]
+    dish_ingredient_usages = {}
+    for ingredient_usage in get_dish_ingredients_from_dish_id(dish_id): # iterate over ingredient usages
+        dish_ingredient_usages[ingredient_usage[-1]] = ingredient_usage # add ingredient usage (list) under its name
+    dish_and_ingredients[dish_name]= {
+        "Ingredients":dish_ingredient_usages,
+        "Description":get_dish_from_id(dish_id)[2]
+    }
+
+
+st.write(dish_and_ingredients)
+
+
 
 # Loop through dishes and create an expander for each
-for dish in dishes:
-    with st.expander(dish[1].upper()):
+for dish in dish_and_ingredients:
+    with st.expander(dish.upper()):
         nutri_tab, cook_tab = st.tabs(["Nutritions & price","Ingredients & description"])
         
         with nutri_tab:
-            st.write(f"**Calories:** {67} kcal")
-            st.write(f"**Category:** {dish[3]}")
-            st.write(f"**Description:** {dish[2]}")
+            st.write(f"**Calories:** TO BE DONE kcal")
+            st.write(f"**Category:** TO BE DONE")
+            st.write(f"**Description:** TO BE DONE")
         
         with cook_tab:
-            for ingredient in dish_ingredients:
-                st.write(ingredient)
+            for ingredient in dish_and_ingredients[dish]["Ingredients"]:
+                st.write(f"{ingredient}:\t{dish_and_ingredients[dish]["Ingredients"][ingredient][6]} {dish_and_ingredients[dish]["Ingredients"][ingredient][7]}")
