@@ -12,9 +12,9 @@ st.set_page_config(layout="wide")
 # fetch ingredients
 def fetch_ingredients_as_dict():
     result_set = cursor.execute("""
-    select id, english_name from ingredients;
+    select id, name from ingredients;
     """).fetchall()
-    return pd.DataFrame(result_set, columns=["id", "english_name"]).set_index("english_name").to_dict()["id"] #returns a dict
+    return pd.DataFrame(result_set, columns=["id", "name"]).set_index("name").to_dict()["id"] #returns a dict
 
 def get_potential_dishes(ingredient_ids):
     conn = sqlite3.connect("food.db")
@@ -68,7 +68,7 @@ def get_dish_ingredients_from_dish_id(dish_id):
     query = """select 
             d.*,
             di.*,
-            i.english_name
+            i.name
         from dishes d
         left join dish_ingredients di
             on di.dish_id = d.id
@@ -125,4 +125,4 @@ for dish in dish_and_ingredients:
         
         with cook_tab:
             for ingredient in dish_and_ingredients[dish]["Ingredients"]:
-                st.write(f"{ingredient}:\t{dish_and_ingredients[dish]["Ingredients"][ingredient][6]} {dish_and_ingredients[dish]["Ingredients"][ingredient][7]}")
+                st.write(f"{ingredient}:\t{dish_and_ingredients[dish]['Ingredients'][ingredient][6]} {dish_and_ingredients[dish]['Ingredients'][ingredient][7]}")
