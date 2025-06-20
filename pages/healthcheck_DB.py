@@ -44,9 +44,9 @@ def compare_all_with_each_other(ingredients_list, threshold = 75):
 # fetch ingredients
 def fetch_ingredients_as_dict():
     result_set = cursor.execute("""
-    select id, english_name from ingredients;
+    select id, name from ingredients;
     """).fetchall()
-    return pd.DataFrame(result_set, columns=["id", "english_name"]).set_index("english_name").to_dict()["id"] #returns a dict
+    return pd.DataFrame(result_set, columns=["id", "name"]).set_index("name").to_dict()["id"] #returns a dict
 
 
 def add_an_ingredient():

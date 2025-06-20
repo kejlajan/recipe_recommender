@@ -1,8 +1,12 @@
 [ ] recommender
-	(o) fetch ingredients for recipe id
-	( ) fetch calories for reciepe id
+	(x) fetch ingredients for recipe id
+	(x) fetch calories for reciepe id
 	(x) display in expanders
 	( ) remove debugging bullshit  
 [ ] DB tweaks
-[ ] mass load of ingredients
-[ ] crud tool for ingredients
+	( ) think about units and conversions
+	( ) standardizing calories
+[ ] Load of ingredients
+	( ) CRUD
+	( ) duplicity checker
+	( ) mass batch import scrape-tool
